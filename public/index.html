@@ -52,15 +52,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 60px;
+    height: 72px;
   }
 
   .nav-logo {
-    font-family: 'Doner', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--purple-main);
-    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-logo img {
+    height: 44px;
+    width: auto;
+    display: block;
+    object-fit: contain;
   }
 
   .nav-logo span { color: var(--black); }
@@ -71,6 +75,20 @@
     letter-spacing: 0.08em;
     color: var(--gray-text);
     text-transform: uppercase;
+  }
+
+  @media (max-width: 480px) {
+    nav {
+      height: 60px;
+      padding: 0 1.25rem;
+    }
+    .nav-logo img {
+      height: 34px;
+    }
+    .nav-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.04em;
+    }
   }
 
   /* HERO */
@@ -165,7 +183,7 @@
   /* PROGRESS BAR */
   .progress-container {
     position: sticky;
-    top: 60px;
+    top: 72px;
     z-index: 90;
     background: var(--white);
     border-bottom: 1px solid var(--gray-border);
@@ -211,7 +229,7 @@
   /* SIDEBAR */
   .sidebar {
     position: sticky;
-    top: 120px;
+    top: 132px;
   }
 
   .sidebar-section {
