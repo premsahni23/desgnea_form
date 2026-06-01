@@ -1176,14 +1176,14 @@
       <p class="submit-note">Our team reviews every application carefully. Shortlisted candidates will receive an interview invitation via email and WhatsApp.</p>
     </div>
 
-    <!-- SUCCESS -->
-    <div class="success-screen" id="success-screen">
-      <div class="success-icon">🎉</div>
-      <h2 style="font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; letter-spacing:-0.5px; margin-bottom:0.75rem;">Application submitted!</h2>
-      <p style="color:var(--gray-text); max-width:420px; margin:0 auto; line-height:1.7; font-size:0.95rem;">Thank you for applying to Desgnea. Our team reviews every application carefully. Shortlisted candidates will receive an interview invitation via email and WhatsApp within 5–7 business days.</p>
-    </div>
-
   </main>
+</div>
+
+<!-- SUCCESS — outside form-main so it's never wiped -->
+<div class="success-screen" id="success-screen">
+  <div class="success-icon">🎉</div>
+  <h2 style="font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; letter-spacing:-0.5px; margin-bottom:0.75rem;">Application submitted!</h2>
+  <p style="color:var(--gray-text); max-width:420px; margin:0 auto; line-height:1.7; font-size:0.95rem;">Thank you for applying to Desgnea. Our team reviews every application carefully. Shortlisted candidates will receive an interview invitation via email and WhatsApp within 5–7 business days.</p>
 </div>
 
 <footer>
@@ -1418,10 +1418,9 @@
       }
 
       // Show success screen
-      document.getElementById('form-main').innerHTML = '';
+      document.getElementById('form-main').style.display = 'none';
+      document.querySelector('.main-layout').style.display = 'none';
       const success = document.getElementById('success-screen');
-      document.getElementById('form-main').appendChild(success);
-      success.style.display = 'block';
       success.classList.add('visible');
       document.getElementById('progress-fill').style.width = '100%';
       document.getElementById('progress-pct').textContent = '100%';
