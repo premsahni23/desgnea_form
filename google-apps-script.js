@@ -2,8 +2,16 @@
 // Then click Deploy → New Deployment → Web App
 // Set "Execute as" = Me, "Who has access" = Anyone
 // Copy the Web App URL and set it as APPS_SCRIPT_URL in Vercel env vars
+//
+// This single script handles two actions:
+//   action = "upload" → saves file to Google Drive, returns the file URL
+//   action = "submit" (default) → appends form data row to Google Sheet
 
 const SHEET_NAME = 'Sheet1';
+
+// Name of the Google Drive folder where CVs and design files will be saved.
+// The folder will be created automatically if it doesn't exist.
+const DRIVE_FOLDER_NAME = 'Desgnea Applications 2026';
 
 const HEADERS = [
   'Submitted At',
@@ -17,6 +25,8 @@ const HEADERS = [
   'Gender',
   'LinkedIn URL',
   'Portfolio URL',
+  'Resume / CV (Drive Link)',
+  'Design File (Drive Link)',
   'Qualification',
   'Degree / Course',
   'College / University',
@@ -54,87 +64,137 @@ const HEADERS = [
   'Anything Else',
 ];
 
+// ─── Main entry point ────────────────────────────────────────────────────────
+
 function doPost(e) {
   try {
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = ss.getSheetByName(SHEET_NAME) || ss.getActiveSheet();
-
-    // Write header row if sheet is empty
-    if (sheet.getLastRow() === 0) {
-      sheet.appendRow(HEADERS);
-      // Bold the header row
-      sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
-      sheet.setFrozenRows(1);
-    }
-
     const data = JSON.parse(e.postData.contents);
 
-    const row = [
-      new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-      data.fullName || '',
-      data.email || '',
-      data.phone || '',
-      data.dob || '',
-      data.city || '',
-      data.state || '',
-      data.country || '',
-      data.gender || '',
-      data.linkedin || '',
-      data.portfolio || '',
-      data.qualification || '',
-      data.degree || '',
-      data.college || '',
-      data.yearOfStudy || '',
-      data.graduationYear || '',
-      data.primaryRole || '',
-      data.secondRole || '',
-      data.whyDesgnea || '',
-      data.whyRole || '',
-      data.careerGoals || '',
-      data.commSkills || '',
-      data.problemSolving || '',
-      data.teamwork || '',
-      data.whatMakesDifferent || '',
-      data.prevInternship || '',
-      data.workedClients || '',
-      data.freelanced || '',
-      data.workedRemotely || '',
-      data.prevExperience || '',
-      data.projectLinks || '',
-      data.dailyHours || '',
-      data.available8Weeks || '',
-      data.startDate || '',
-      data.preferredHours || '',
-      data.roleQ1 || '',
-      data.roleQ2 || '',
-      data.roleQ3 || '',
-      data.roleQ4 || '',
-      data.assessmentAnswer || '',
-      data.whySelectYou || '',
-      data.internshipExpectations || '',
-      data.skillsToDevelop || '',
-      data.comfortableFeedback || '',
-      data.comfortableMeetings || '',
-      data.anythingElse || '',
-    ];
-
-    sheet.appendRow(row);
-
-    return ContentService
-      .createTextOutput(JSON.stringify({ success: true }))
-      .setMimeType(ContentService.MimeType.JSON);
-
+    if (data.action === 'upload') {
+      return handleFileUpload(data);
+    } else {
+      return handleFormSubmit(data);
+    }
   } catch (err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ success: false, error: err.message }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return jsonResponse({ success: false, error: err.message });
   }
 }
 
-// Test this function manually in Apps Script to verify the sheet connection
+// ─── File upload handler ──────────────────────────────────────────────────────
+
+function handleFileUpload(data) {
+  // data.fileName  — original file name
+  // data.mimeType  — e.g. "application/pdf"
+  // data.fileData  — base64-encoded file content
+
+  if (!data.fileData || !data.fileName) {
+    return jsonResponse({ success: false, error: 'Missing file data.' });
+  }
+
+  const folder = getOrCreateFolder(DRIVE_FOLDER_NAME);
+
+  const blob = Utilities.newBlob(
+    Utilities.base64Decode(data.fileData),
+    data.mimeType || 'application/octet-stream',
+    data.fileName
+  );
+
+  const file = folder.createFile(blob);
+
+  // Make the file viewable by anyone with the link
+  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+
+  return jsonResponse({ success: true, fileUrl: file.getUrl(), fileId: file.getId() });
+}
+
+// ─── Form submit handler ──────────────────────────────────────────────────────
+
+function handleFormSubmit(data) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName(SHEET_NAME) || ss.getActiveSheet();
+
+  // Write header row if sheet is empty
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(HEADERS);
+    sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
+    sheet.setFrozenRows(1);
+  }
+
+  const row = [
+    new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+    data.fullName || '',
+    data.email || '',
+    data.phone || '',
+    data.dob || '',
+    data.city || '',
+    data.state || '',
+    data.country || '',
+    data.gender || '',
+    data.linkedin || '',
+    data.portfolio || '',
+    data.resumeUrl || '',        // Google Drive link
+    data.designFileUrl || '',    // Google Drive link (design role only)
+    data.qualification || '',
+    data.degree || '',
+    data.college || '',
+    data.yearOfStudy || '',
+    data.graduationYear || '',
+    data.primaryRole || '',
+    data.secondRole || '',
+    data.whyDesgnea || '',
+    data.whyRole || '',
+    data.careerGoals || '',
+    data.commSkills || '',
+    data.problemSolving || '',
+    data.teamwork || '',
+    data.whatMakesDifferent || '',
+    data.prevInternship || '',
+    data.workedClients || '',
+    data.freelanced || '',
+    data.workedRemotely || '',
+    data.prevExperience || '',
+    data.projectLinks || '',
+    data.dailyHours || '',
+    data.available8Weeks || '',
+    data.startDate || '',
+    data.preferredHours || '',
+    data.roleQ1 || '',
+    data.roleQ2 || '',
+    data.roleQ3 || '',
+    data.roleQ4 || '',
+    data.assessmentAnswer || '',
+    data.whySelectYou || '',
+    data.internshipExpectations || '',
+    data.skillsToDevelop || '',
+    data.comfortableFeedback || '',
+    data.comfortableMeetings || '',
+    data.anythingElse || '',
+  ];
+
+  sheet.appendRow(row);
+
+  return jsonResponse({ success: true });
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function getOrCreateFolder(name) {
+  const folders = DriveApp.getFoldersByName(name);
+  if (folders.hasNext()) return folders.next();
+  return DriveApp.createFolder(name);
+}
+
+function jsonResponse(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// Run this manually in Apps Script editor to verify everything is connected
 function testConnection() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sheet = ss.getSheetByName(SHEET_NAME) || ss.getActiveSheet();
-  Logger.log('Connected to sheet: ' + sheet.getName());
-  Logger.log('Current rows: ' + sheet.getLastRow());
+  Logger.log('Sheet: ' + sheet.getName() + ' | Rows: ' + sheet.getLastRow());
+  const folder = getOrCreateFolder(DRIVE_FOLDER_NAME);
+  Logger.log('Drive folder: ' + folder.getName() + ' | URL: ' + folder.getUrl());
 }
