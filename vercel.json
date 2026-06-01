@@ -1,39 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "index.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "Icon-logo-2.png",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "doner-regulartext.otf",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "api/submit.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/submit",
-      "dest": "/api/submit.js"
-    },
-    {
-      "src": "/Icon-logo-2.png",
-      "dest": "/Icon-logo-2.png"
-    },
-    {
-      "src": "/doner-regulartext.otf",
-      "dest": "/doner-regulartext.otf"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
-    }
+  "rewrites": [
+    { "source": "/api/submit", "destination": "/api/submit.js" }
   ]
 }
