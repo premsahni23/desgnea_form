@@ -1,19 +1,6 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/submit.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/submit",
-      "dest": "/api/submit.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/desgnea-application.html"
-    }
+  "rewrites": [
+    { "source": "/api/submit", "destination": "/api/submit.js" }
   ]
 }
