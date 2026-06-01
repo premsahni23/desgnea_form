@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desgnea — Internship & Associate Program 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple-light: #F7F0FF;
+    --purple-soft: #D7C7EC;
+    --purple-mid: #D7C7EC;
+    --purple-main: #7364E3;
+    --purple-dark: #5040B8;
+    --purple-deeper: #3A2D90;
+    --white: #FFFFFF;
+    --black: #000000;
+    --gray-bg: #F8F6FF;
+    --gray-light: #F0EDF8;
+    --gray-border: #E4DEF5;
+    --gray-text: #6B6080;
+    --gray-muted: #9B90B0;
+    --text-dark: #1A1040;
+    --text-body: #3D3060;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--purple-main);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-logo span { color: var(--black); }
+
+  .nav-tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--gray-text);
+    text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--purple-light) 0%, #EDE6FF 50%, var(--gray-bg) 100%);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(115,100,227,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(115,100,227,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--purple-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--purple-main);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 .accent { color: var(--purple-main); }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text-body);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    color: var(--gray-text);
+    font-weight: 500;
+  }
+
+  .hero-meta-item { display: flex; align-items: center; gap: 5px; }
+
+  /* PROGRESS BAR */
+  .progress-container {
+    position: sticky;
+    top: 60px;
+    z-index: 90;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-border);
+    padding: 0.75rem 2rem;
+  }
+
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.78rem;
+    color: var(--gray-text);
+    font-weight: 500;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: var(--gray-border);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple-mid), var(--purple-main));
+    border-radius: 100px;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  /* MAIN LAYOUT */
+  .main-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    position: sticky;
+    top: 120px;
+  }
+
+  .sidebar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--gray-muted);
+    text-decoration: none;
+    border: none;
+    background: none;
+    text-align: left;
+    width: 100%;
+  }
+
+  .sidebar-item:hover { background: var(--gray-light); color: var(--text-dark); }
+  .sidebar-item.active { background: var(--purple-light); color: var(--purple-dark); }
+
+  .sidebar-num {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--gray-border);
+    font-size: 0.65rem;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--gray-text);
+  }
+
+  .sidebar-item.active .sidebar-num { background: var(--purple-main); color: white; }
+  .sidebar-item.done .sidebar-num { background: var(--purple-mid); color: var(--purple-dark); }
+  .sidebar-item.done { color: var(--gray-text); }
+
+  /* FORM CONTENT */
+  .form-content { min-width: 0; }
+
+  /* SECTIONS */
+  .form-section {
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .form-section:focus-within { box-shadow: 0 0 0 3px rgba(115,100,227,0.12); border-color: var(--purple-mid); }
+
+  .section-header {
+    background: var(--gray-bg);
+    padding: 1.25rem 1.75rem;
+    border-bottom: 1px solid var(--gray-border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-num {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: var(--purple-main);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: -0.2px;
+  }
+
+  .section-body { padding: 1.75rem; display: flex; flex-direction: column; gap: 1.25rem; }
+
+  /* FIELD */
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
+  label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-body);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .required-star { color: var(--purple-main); }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    background: var(--white);
+    transition: all 0.2s;
+    outline: none;
+    appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--purple-main);
+    box-shadow: 0 0 0 3px rgba(115,100,227,0.12);
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--gray-muted); }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239B90B0' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+  .field-hint {
+    font-size: 0.74rem;
+    color: var(--gray-muted);
+    line-height: 1.5;
+  }
+
+  /* RADIO / CHECKBOX GROUPS */
+  .radio-group, .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .radio-group.horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .radio-option, .checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.86rem;
+    color: var(--text-body);
+    font-weight: 400;
+  }
+
+  .radio-option:hover, .checkbox-option:hover { border-color: var(--purple-mid); background: var(--purple-light); }
+
+  .radio-option input, .checkbox-option input { display: none; }
+
+  .radio-option.selected, .checkbox-option.selected {
+    border-color: var(--purple-main);
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    font-weight: 500;
+  }
+
+  .radio-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--gray-border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .radio-option.selected .radio-dot {
+    border-color: var(--purple-main);
+    background: var(--purple-main);
+  }
+
+  .radio-option.selected .radio-dot::after {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: white;
+  }
+
+  .check-box {
+    width: 16px; height: 16px;
+    border-radius: 4px;
+    border: 2px solid var(--gray-border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    font-size: 10px;
+    color: white;
+  }
+
+  .checkbox-option.selected .check-box {
+    border-color: var(--purple-main);
+    background: var(--purple-main);
+  }
+
+  /* SCALE RATING */
+  .scale-rating { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .scale-btn {
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    border: 1.5px solid var(--gray-border);
+    background: var(--white);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--gray-text);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .scale-btn:hover { border-color: var(--purple-mid); background: var(--purple-light); color: var(--purple-dark); }
+  .scale-btn.selected { border-color: var(--purple-main); background: var(--purple-main); color: white; }
+
+  /* ROLE CARDS */
+  .role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+  .role-card {
+    border: 1.5px solid var(--gray-border);
+    border-radius: 12px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .role-card:hover { border-color: var(--purple-mid); background: var(--purple-light); }
+
+  .role-card.selected {
+    border-color: var(--purple-main);
+    background: var(--purple-light);
+  }
+
+  .role-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--gray-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+
+  .role-card.selected .role-icon { background: rgba(115,100,227,0.15); }
+
+  .role-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.3;
+  }
+
+  .role-card.selected .role-name { color: var(--purple-dark); }
+
+  /* FILE UPLOAD */
+  .file-upload {
+    border: 2px dashed var(--gray-border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--gray-bg);
+  }
+
+  .file-upload:hover { border-color: var(--purple-main); background: var(--purple-light); }
+
+  .file-upload-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .file-upload-text { font-size: 0.84rem; color: var(--gray-text); line-height: 1.5; }
+  .file-upload-text strong { color: var(--purple-main); }
+
+  .file-input { display: none; }
+
+  /* ROLE-SPECIFIC SECTION */
+  .conditional-section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .conditional-section.visible { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .role-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    border: 1px solid var(--purple-mid);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+  /* SUBMIT */
+  .submit-area {
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .declaration-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--white);
+    border: 1.5px solid var(--gray-border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    transition: all 0.2s;
+  }
+
+  .declaration-check:hover { border-color: var(--purple-mid); }
+  .declaration-check.selected { border-color: var(--purple-main); background: var(--purple-light); }
+
+  .declaration-text {
+    font-size: 0.84rem;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--purple-main);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 40px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: -0.2px;
+  }
+
+  .btn-submit:hover { background: var(--purple-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(115,100,227,0.3); }
+  .btn-submit:active { transform: translateY(0); }
+
+  .submit-note {
+    font-size: 0.74rem;
+    color: var(--gray-muted);
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+
+  /* SUCCESS */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .success-screen.visible { display: block; }
+
+  .success-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--purple-light);
+    border: 2px solid var(--purple-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+    animation: scaleIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  @keyframes scaleIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--gray-border);
+    margin: 0.5rem 0;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    margin-top: 3rem;
+  }
+
+  footer strong { color: white; font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 800; }
+
+  .footer-tagline { font-size: 0.72rem; margin-top: 4px; letter-spacing: 0.06em; opacity: 0.5; text-transform: uppercase; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .main-layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .field-row, .field-row-3, .role-grid { grid-template-columns: 1fr; }
+    .hero { padding: 3rem 1.25rem 2.5rem; }
+  }
+
+  .char-count {
+    font-size: 0.72rem;
+    color: var(--gray-muted);
+    text-align: right;
+  }
+
+  .yes-no-group { display: flex; gap: 8px; }
+  .yes-no-group .radio-option { flex: 1; justify-content: center; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Desgnea<span>.</span></div>
+  <span class="nav-tag">Internship & Associate Program 2026</span>
+</nav>
+
+<div class="progress-container">
+  <div class="progress-header">
+    <span id="progress-label">Section 1 of 9 — Personal Information</span>
+    <span id="progress-pct">0%</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-badge"><div class="hero-badge-dot"></div> Applications Open — 2026 Cohort</div>
+  <h1>Build the future<br>with <span class="accent">Desgnea</span></h1>
+  <p>We're building a team of ambitious creators, marketers, developers, designers, operators, and business professionals who want real-world experience and impactful work.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">⏱ 10–15 min</div>
+    <div class="hero-meta-item">· Shortlisted candidates invited to interview</div>
+    <div class="hero-meta-item">· 8-week minimum commitment</div>
+  </div>
+</div>
+
+<div class="main-layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <button class="sidebar-item active" onclick="scrollToSection('s1')"><span class="sidebar-num">1</span>Personal Info</button>
+      <button class="sidebar-item" onclick="scrollToSection('s2')"><span class="sidebar-num">2</span>Education</button>
+      <button class="sidebar-item" onclick="scrollToSection('s3')"><span class="sidebar-num">3</span>Role Selection</button>
+      <button class="sidebar-item" onclick="scrollToSection('s4')"><span class="sidebar-num">4</span>General Screening</button>
+      <button class="sidebar-item" onclick="scrollToSection('s5')"><span class="sidebar-num">5</span>Experience</button>
+      <button class="sidebar-item" onclick="scrollToSection('s6')"><span class="sidebar-num">6</span>Availability</button>
+      <button class="sidebar-item" onclick="scrollToSection('s7')"><span class="sidebar-num">7</span>Role Questions</button>
+      <button class="sidebar-item" onclick="scrollToSection('s8')"><span class="sidebar-num">8</span>Assessment</button>
+      <button class="sidebar-item" onclick="scrollToSection('s9')"><span class="sidebar-num">9</span>Final Questions</button>
+    </div>
+  </aside>
+
+  <!-- FORM -->
+  <main class="form-content" id="form-main">
+
+    <!-- S1 PERSONAL -->
+    <div class="form-section" id="s1">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div class="section-title">Personal Information</div>
+      </div>
+      <div class="section-body">
+        <div class="field-row">
+          <div class="field">
+            <label>Full Name <span class="required-star">*</span></label>
+            <input type="text" placeholder="Your full name" oninput="updateProgress()">
+          </div>
+          <div class="field">
+            <label>Email Address <span class="required-star">*</span></label>
+            <input type="email" placeholder="you@example.com" oninput="updateProgress()">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Phone Number <span class="required-star">*</span></label>
+            <input type="tel" placeholder="+91 XXXXX XXXXX (WhatsApp preferred)">
+          </div>
+          <div class="field">
+            <label>Date of Birth <span class="required-star">*</span></label>
+            <input type="date">
+          </div>
+        </div>
+        <div class="field-row-3">
+          <div class="field">
+            <label>City <span class="required-star">*</span></label>
+            <input type="text" placeholder="City">
+          </div>
+          <div class="field">
+            <label>State <span class="required-star">*</span></label>
+            <input type="text" placeholder="State">
+          </div>
+          <div class="field">
+            <label>Country <span class="required-star">*</span></label>
+            <input type="text" placeholder="Country">
+          </div>
+        </div>
+        <div class="field">
+          <label>Gender</label>
+          <div class="radio-group horizontal">
+            <div class="radio-option" onclick="selectRadio(this, 'gender')"><input type="radio" name="gender"><div class="radio-dot"></div>Male</div>
+            <div class="radio-option" onclick="selectRadio(this, 'gender')"><input type="radio" name="gender"><div class="radio-dot"></div>Female</div>
+            <div class="radio-option" onclick="selectRadio(this, 'gender')"><input type="radio" name="gender"><div class="radio-dot"></div>Prefer not to say</div>
+            <div class="radio-option" onclick="selectRadio(this, 'gender')"><input type="radio" name="gender"><div class="radio-dot"></div>Other</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>LinkedIn Profile URL</label>
+          <input type="url" placeholder="https://linkedin.com/in/yourprofile">
+        </div>
+        <div class="field">
+          <label>Portfolio / Website / GitHub / Behance / Dribbble</label>
+          <input type="url" placeholder="https://yourportfolio.com">
+        </div>
+        <div class="field">
+          <label>Resume / CV <span class="required-star">*</span></label>
+          <div class="file-upload" onclick="document.getElementById('resume-file').click()">
+            <div class="file-upload-icon">📎</div>
+            <div class="file-upload-text"><strong>Click to upload</strong> your resume/CV<br>PDF only · Max 5MB</div>
+            <input type="file" id="resume-file" class="file-input" accept=".pdf" onchange="showFileName(this, 'resume-label')">
+          </div>
+          <div class="field-hint" id="resume-label"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S2 EDUCATION -->
+    <div class="form-section" id="s2">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div class="section-title">Education</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Current Qualification <span class="required-star">*</span></label>
+          <div class="radio-group horizontal">
+            <div class="radio-option" onclick="selectRadio(this,'qual')"><input type="radio" name="qual"><div class="radio-dot"></div>High School</div>
+            <div class="radio-option" onclick="selectRadio(this,'qual')"><input type="radio" name="qual"><div class="radio-dot"></div>Diploma</div>
+            <div class="radio-option" onclick="selectRadio(this,'qual')"><input type="radio" name="qual"><div class="radio-dot"></div>Undergraduate</div>
+            <div class="radio-option" onclick="selectRadio(this,'qual')"><input type="radio" name="qual"><div class="radio-dot"></div>Postgraduate</div>
+            <div class="radio-option" onclick="selectRadio(this,'qual')"><input type="radio" name="qual"><div class="radio-dot"></div>Other</div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Degree / Course <span class="required-star">*</span></label>
+            <input type="text" placeholder="e.g. B.Tech Computer Science">
+          </div>
+          <div class="field">
+            <label>College / University <span class="required-star">*</span></label>
+            <input type="text" placeholder="Institution name">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Current Year of Study <span class="required-star">*</span></label>
+            <div class="radio-group horizontal">
+              <div class="radio-option" onclick="selectRadio(this,'year')"><input type="radio" name="year"><div class="radio-dot"></div>1st</div>
+              <div class="radio-option" onclick="selectRadio(this,'year')"><input type="radio" name="year"><div class="radio-dot"></div>2nd</div>
+              <div class="radio-option" onclick="selectRadio(this,'year')"><input type="radio" name="year"><div class="radio-dot"></div>3rd</div>
+              <div class="radio-option" onclick="selectRadio(this,'year')"><input type="radio" name="year"><div class="radio-dot"></div>Final</div>
+              <div class="radio-option" onclick="selectRadio(this,'year')"><input type="radio" name="year"><div class="radio-dot"></div>Graduate</div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Graduation Year <span class="required-star">*</span></label>
+            <select>
+              <option value="">Select year</option>
+              <option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S3 ROLE -->
+    <div class="form-section" id="s3">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title">Role Selection</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Which role are you applying for? <span class="required-star">*</span></label>
+          <div class="role-grid" id="role-primary-grid">
+            <div class="role-card" onclick="selectRole(this, 'primary', 'sales')"><div class="role-icon">📈</div><div class="role-name">Sales & Business Development</div></div>
+            <div class="role-card" onclick="selectRole(this, 'primary', 'marketing')"><div class="role-icon">🚀</div><div class="role-name">Growth & Marketing</div></div>
+            <div class="role-card" onclick="selectRole(this, 'primary', 'design')"><div class="role-icon">🎨</div><div class="role-name">Design (UI/UX & Social Media)</div></div>
+            <div class="role-card" onclick="selectRole(this, 'primary', 'dev')"><div class="role-icon">⚙️</div><div class="role-name">Development (Web & Automation)</div></div>
+            <div class="role-card" onclick="selectRole(this, 'primary', 'content')"><div class="role-icon">✍️</div><div class="role-name">Content & Copywriting</div></div>
+            <div class="role-card" onclick="selectRole(this, 'primary', 'ops')"><div class="role-icon">🗂️</div><div class="role-name">Operations & Project Management</div></div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Second preference (optional)</label>
+          <select id="role-second">
+            <option value="">None</option>
+            <option>Sales & Business Development</option>
+            <option>Growth & Marketing</option>
+            <option>Design (UI/UX & Social Media)</option>
+            <option>Development (Web & Automation)</option>
+            <option>Content & Copywriting</option>
+            <option>Operations & Project Management</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- S4 GENERAL -->
+    <div class="form-section" id="s4">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div class="section-title">General Screening</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Why do you want to join Desgnea? <span class="required-star">*</span></label>
+          <textarea rows="5" placeholder="Tell us why you're excited about Desgnea... (minimum 100 words)" id="why-desgnea" oninput="countChars(this, 'why-count')"></textarea>
+          <div class="char-count" id="why-count">0 words</div>
+        </div>
+        <div class="field">
+          <label>What attracted you to this role? <span class="required-star">*</span></label>
+          <textarea rows="4" placeholder="Share what draws you to this specific role..."></textarea>
+        </div>
+        <div class="field">
+          <label>What are your career goals for the next 2 years? <span class="required-star">*</span></label>
+          <textarea rows="4" placeholder="Describe where you see yourself in 2 years..."></textarea>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>Communication Skills (1–10)</label>
+          <div class="scale-rating" id="scale-comm">
+            <button class="scale-btn" onclick="selectScale(this, 'scale-comm')">1</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-comm')">2</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-comm')">3</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-comm')">4</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-comm')">5</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-comm')">6</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-comm')">7</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-comm')">8</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-comm')">9</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-comm')">10</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Problem-Solving (1–10)</label>
+          <div class="scale-rating" id="scale-prob">
+            <button class="scale-btn" onclick="selectScale(this, 'scale-prob')">1</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-prob')">2</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-prob')">3</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-prob')">4</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-prob')">5</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-prob')">6</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-prob')">7</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-prob')">8</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-prob')">9</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-prob')">10</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Teamwork (1–10)</label>
+          <div class="scale-rating" id="scale-team">
+            <button class="scale-btn" onclick="selectScale(this, 'scale-team')">1</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-team')">2</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-team')">3</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-team')">4</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-team')">5</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-team')">6</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-team')">7</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-team')">8</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-team')">9</button>
+            <button class="scale-btn" onclick="selectScale(this, 'scale-team')">10</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>What makes you different from other candidates? <span class="required-star">*</span></label>
+          <textarea rows="4" placeholder="What's your unique edge?"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- S5 EXPERIENCE -->
+    <div class="form-section" id="s5">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div class="section-title">Experience</div>
+      </div>
+      <div class="section-body">
+        <div class="field-row">
+          <div class="field">
+            <label>Completed an internship before?</label>
+            <div class="yes-no-group">
+              <div class="radio-option" onclick="selectRadio(this,'intern')"><input type="radio" name="intern"><div class="radio-dot"></div>Yes</div>
+              <div class="radio-option" onclick="selectRadio(this,'intern')"><input type="radio" name="intern"><div class="radio-dot"></div>No</div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Worked with clients?</label>
+            <div class="yes-no-group">
+              <div class="radio-option" onclick="selectRadio(this,'clients')"><input type="radio" name="clients"><div class="radio-dot"></div>Yes</div>
+              <div class="radio-option" onclick="selectRadio(this,'clients')"><input type="radio" name="clients"><div class="radio-dot"></div>No</div>
+            </div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Freelanced before?</label>
+            <div class="yes-no-group">
+              <div class="radio-option" onclick="selectRadio(this,'freelance')"><input type="radio" name="freelance"><div class="radio-dot"></div>Yes</div>
+              <div class="radio-option" onclick="selectRadio(this,'freelance')"><input type="radio" name="freelance"><div class="radio-dot"></div>No</div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Worked remotely before?</label>
+            <div class="yes-no-group">
+              <div class="radio-option" onclick="selectRadio(this,'remote')"><input type="radio" name="remote"><div class="radio-dot"></div>Yes</div>
+              <div class="radio-option" onclick="selectRadio(this,'remote')"><input type="radio" name="remote"><div class="radio-dot"></div>No</div>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Describe your previous experience in detail</label>
+          <textarea rows="5" placeholder="Roles, responsibilities, impact — be specific..."></textarea>
+        </div>
+        <div class="field">
+          <label>Links to your best projects</label>
+          <textarea rows="3" placeholder="GitHub, Behance, Notion, live links — one per line..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- S6 AVAILABILITY -->
+    <div class="form-section" id="s6">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <div class="section-title">Availability</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Hours you can dedicate daily</label>
+          <div class="radio-group horizontal">
+            <div class="radio-option" onclick="selectRadio(this,'hours')"><input type="radio" name="hours"><div class="radio-dot"></div>1–2 Hours</div>
+            <div class="radio-option" onclick="selectRadio(this,'hours')"><input type="radio" name="hours"><div class="radio-dot"></div>2–4 Hours</div>
+            <div class="radio-option" onclick="selectRadio(this,'hours')"><input type="radio" name="hours"><div class="radio-dot"></div>4–6 Hours</div>
+            <div class="radio-option" onclick="selectRadio(this,'hours')"><input type="radio" name="hours"><div class="radio-dot"></div>6+ Hours</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Available for at least 8 weeks?</label>
+          <div class="yes-no-group">
+            <div class="radio-option" onclick="selectRadio(this,'weeks')"><input type="radio" name="weeks"><div class="radio-dot"></div>Yes</div>
+            <div class="radio-option" onclick="selectRadio(this,'weeks')"><input type="radio" name="weeks"><div class="radio-dot"></div>No</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>When can you start?</label>
+          <div class="radio-group horizontal">
+            <div class="radio-option" onclick="selectRadio(this,'start')"><input type="radio" name="start"><div class="radio-dot"></div>Immediately</div>
+            <div class="radio-option" onclick="selectRadio(this,'start')"><input type="radio" name="start"><div class="radio-dot"></div>Within 1 week</div>
+            <div class="radio-option" onclick="selectRadio(this,'start')"><input type="radio" name="start"><div class="radio-dot"></div>Within 2 weeks</div>
+            <div class="radio-option" onclick="selectRadio(this,'start')"><input type="radio" name="start"><div class="radio-dot"></div>Within 1 month</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Preferred working hours</label>
+          <input type="text" placeholder="e.g. 9 AM – 1 PM IST">
+        </div>
+      </div>
+    </div>
+
+    <!-- S7 ROLE-SPECIFIC -->
+    <div class="form-section" id="s7">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <div class="section-title">Role-Specific Questions</div>
+      </div>
+      <div class="section-body">
+        <p style="font-size:0.84rem; color:var(--gray-text);">Answer based on your selected primary role. Select your role in Section 3 to see relevant questions.</p>
+
+        <!-- SALES -->
+        <div class="conditional-section" id="qs-sales">
+          <div class="role-tag">📈 Sales & Business Development</div>
+          <div class="field"><label>Write a cold LinkedIn message to a potential client</label><textarea rows="4" placeholder="Keep it concise, personalized, and compelling..."></textarea></div>
+          <div class="field"><label>How would you generate your first 50 leads for Desgnea?</label><textarea rows="4" placeholder="Your approach, channels, strategy..."></textarea></div>
+          <div class="field"><label>What CRM tools have you used?</label><input type="text" placeholder="e.g. HubSpot, Salesforce, Notion CRM..."></div>
+        </div>
+
+        <!-- MARKETING -->
+        <div class="conditional-section" id="qs-marketing">
+          <div class="role-tag">🚀 Growth & Marketing</div>
+          <div class="field"><label>How would you grow Desgnea's Instagram from 1,000 to 10,000 followers?</label><textarea rows="4" placeholder="Tactics, timeline, content strategy..."></textarea></div>
+          <div class="field"><label>Suggest 3 content ideas for Desgnea</label><textarea rows="4" placeholder="Idea 1: ...\nIdea 2: ...\nIdea 3: ..."></textarea></div>
+          <div class="field"><label>What marketing tools have you used?</label><input type="text" placeholder="e.g. Canva, Mailchimp, Meta Ads Manager..."></div>
+        </div>
+
+        <!-- DESIGN -->
+        <div class="conditional-section" id="qs-design">
+          <div class="role-tag">🎨 Design (UI/UX & Social Media)</div>
+          <div class="field"><label>Figma Portfolio Link</label><input type="url" placeholder="https://figma.com/..."></div>
+          <div class="field"><label>Behance / Dribbble Profile</label><input type="url" placeholder="https://behance.net/..."></div>
+          <div class="field"><label>Pick any app and explain one UX problem in it</label><textarea rows="4" placeholder="App name, the problem, and how you'd fix it..."></textarea></div>
+          <div class="field"><label>Upload one of your best designs</label>
+            <div class="file-upload" onclick="document.getElementById('design-file').click()">
+              <div class="file-upload-icon">🖼️</div>
+              <div class="file-upload-text"><strong>Click to upload</strong> your design<br>PNG, JPG, or PDF</div>
+              <input type="file" id="design-file" class="file-input" accept=".png,.jpg,.jpeg,.pdf" onchange="showFileName(this, 'design-label')">
+            </div>
+            <div class="field-hint" id="design-label"></div>
+          </div>
+        </div>
+
+        <!-- DEV -->
+        <div class="conditional-section" id="qs-dev">
+          <div class="role-tag">⚙️ Development (Web & Automation)</div>
+          <div class="field"><label>GitHub Profile Link</label><input type="url" placeholder="https://github.com/yourusername"></div>
+          <div class="field"><label>Tech Stack you know</label><input type="text" placeholder="e.g. React, Node.js, Python, Tailwind, PostgreSQL..."></div>
+          <div class="field"><label>Describe one project you built from scratch</label><textarea rows="4" placeholder="What, why, how — be specific about your role..."></textarea></div>
+          <div class="field"><label>Have you worked with AI, APIs, Automation tools?</label><input type="text" placeholder="e.g. n8n, Make, Zapier, OpenAI API, LangChain..."></div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="conditional-section" id="qs-content">
+          <div class="role-tag">✍️ Content & Copywriting</div>
+          <div class="field"><label>Write a 100-word LinkedIn post promoting Desgnea</label><textarea rows="5" placeholder="Make it scroll-stopping..." id="linkedin-post" oninput="countChars(this,'linkedin-count')"></textarea><div class="char-count" id="linkedin-count">0 words</div></div>
+          <div class="field"><label>Write a cold outreach message for a design agency</label><textarea rows="4" placeholder="Brief, punchy, and value-forward..."></textarea></div>
+          <div class="field"><label>Links to your published content</label><textarea rows="3" placeholder="Articles, newsletters, social posts — one per line..."></textarea></div>
+        </div>
+
+        <!-- OPS -->
+        <div class="conditional-section" id="qs-ops">
+          <div class="role-tag">🗂️ Operations & Project Management</div>
+          <div class="field"><label>How would you manage a project with a strict deadline?</label><textarea rows="4" placeholder="Your process, tools, communication style..."></textarea></div>
+          <div class="field"><label>Describe a situation where you solved a difficult problem</label><textarea rows="4" placeholder="Situation, your action, the outcome..."></textarea></div>
+          <div class="field"><label>Which project management tools have you used?</label><input type="text" placeholder="e.g. Notion, Trello, Jira, ClickUp, Asana..."></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S8 ASSESSMENT -->
+    <div class="form-section" id="s8">
+      <div class="section-header">
+        <div class="section-num">8</div>
+        <div class="section-title">Practical Assessment</div>
+      </div>
+      <div class="section-body">
+        <p style="font-size:0.84rem; color:var(--gray-text); margin-bottom:0.5rem;">Complete ONE task based on your selected role.</p>
+
+        <div class="conditional-section" id="as-sales"><div class="role-tag">📈 Sales</div>
+          <div class="field"><label>Find 5 potential leads for Desgnea <span class="required-star">*</span></label><textarea rows="5" placeholder="Company name, contact, LinkedIn URL, why they're a fit — for each..."></textarea></div>
+        </div>
+        <div class="conditional-section" id="as-marketing"><div class="role-tag">🚀 Marketing</div>
+          <div class="field"><label>Create a one-week content strategy <span class="required-star">*</span></label><textarea rows="6" placeholder="Day-by-day plan, themes, formats, captions..."></textarea></div>
+        </div>
+        <div class="conditional-section" id="as-design"><div class="role-tag">🎨 Design</div>
+          <div class="field"><label>Redesign any screen — share the Figma link <span class="required-star">*</span></label><input type="url" placeholder="https://figma.com/..."></div>
+        </div>
+        <div class="conditional-section" id="as-dev"><div class="role-tag">⚙️ Development</div>
+          <div class="field"><label>Build a small feature/project — share GitHub link <span class="required-star">*</span></label><input type="url" placeholder="https://github.com/..."></div>
+        </div>
+        <div class="conditional-section" id="as-content"><div class="role-tag">✍️ Content</div>
+          <div class="field"><label>Write a 300-word blog post <span class="required-star">*</span></label><textarea rows="10" placeholder="Choose a topic relevant to design, marketing, or startups..." id="blog-post" oninput="countChars(this,'blog-count')"></textarea><div class="char-count" id="blog-count">0 words</div></div>
+        </div>
+        <div class="conditional-section" id="as-ops"><div class="role-tag">🗂️ Operations</div>
+          <div class="field"><label>Create a project workflow document <span class="required-star">*</span></label><textarea rows="6" placeholder="Outline stages, responsibilities, timelines, tools..."></textarea></div>
+        </div>
+
+        <div id="assessment-placeholder" style="padding:1rem; background:var(--gray-bg); border-radius:10px; text-align:center; color:var(--gray-muted); font-size:0.84rem;">
+          Select your primary role in Section 3 to see your assessment task.
+        </div>
+      </div>
+    </div>
+
+    <!-- S9 FINAL -->
+    <div class="form-section" id="s9">
+      <div class="section-header">
+        <div class="section-num">9</div>
+        <div class="section-title">Final Questions</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Why should we select you? <span class="required-star">*</span></label>
+          <textarea rows="4" placeholder="Your strongest pitch..."></textarea>
+        </div>
+        <div class="field">
+          <label>What do you expect from this internship? <span class="required-star">*</span></label>
+          <textarea rows="4" placeholder="Learning goals, mentorship, type of work..."></textarea>
+        </div>
+        <div class="field">
+          <label>What skills are you hoping to develop? <span class="required-star">*</span></label>
+          <textarea rows="3" placeholder="Be specific about skills..."></textarea>
+        </div>
+        <div class="field">
+          <label>Comfortable receiving feedback and making revisions?</label>
+          <div class="yes-no-group">
+            <div class="radio-option" onclick="selectRadio(this,'feedback')"><input type="radio" name="feedback"><div class="radio-dot"></div>Yes</div>
+            <div class="radio-option" onclick="selectRadio(this,'feedback')"><input type="radio" name="feedback"><div class="radio-dot"></div>No</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Comfortable attending weekly team meetings?</label>
+          <div class="yes-no-group">
+            <div class="radio-option" onclick="selectRadio(this,'meetings')"><input type="radio" name="meetings"><div class="radio-dot"></div>Yes</div>
+            <div class="radio-option" onclick="selectRadio(this,'meetings')"><input type="radio" name="meetings"><div class="radio-dot"></div>No</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Anything else you'd like us to know?</label>
+          <textarea rows="3" placeholder="Additional context, links, or anything else..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-area">
+      <div class="declaration-check" id="declaration-box" onclick="toggleDeclaration()">
+        <div class="check-box" id="declaration-check">✓</div>
+        <div class="declaration-text">
+          <strong style="font-weight:600; color:var(--text-dark);">Declaration</strong><br>
+          I confirm that all information provided above is accurate and truthful. I understand that any false information may result in disqualification.
+        </div>
+      </div>
+      <button class="btn-submit" onclick="submitForm()">
+        Submit Application →
+      </button>
+      <p class="submit-note">Our team reviews every application carefully. Shortlisted candidates will receive an interview invitation via email and WhatsApp.</p>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="success-screen">
+      <div class="success-icon">🎉</div>
+      <h2 style="font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; letter-spacing:-0.5px; margin-bottom:0.75rem;">Application submitted!</h2>
+      <p style="color:var(--gray-text); max-width:420px; margin:0 auto; line-height:1.7; font-size:0.95rem;">Thank you for applying to Desgnea. Our team reviews every application carefully. Shortlisted candidates will receive an interview invitation via email and WhatsApp within 5–7 business days.</p>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <strong>DESGNEA</strong>
+  <p class="footer-tagline">Design · Development · Growth · Innovation</p>
+</footer>
+
+<script>
+  let selectedRole = null;
+  let declarationChecked = false;
+
+  function selectRadio(el, group) {
+    document.querySelectorAll(`.radio-option[onclick*="'${group}'"]`).forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    updateProgress();
+  }
+
+  function selectScale(btn, groupId) {
+    document.querySelectorAll(`#${groupId} .scale-btn`).forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+
+  function selectRole(card, type, role) {
+    if (type === 'primary') {
+      document.querySelectorAll('#role-primary-grid .role-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedRole = role;
+      updateRoleQuestions(role);
+      updateProgress();
+    }
+  }
+
+  function updateRoleQuestions(role) {
+    const roles = ['sales','marketing','design','dev','content','ops'];
+    roles.forEach(r => {
+      const qs = document.getElementById('qs-' + r);
+      const as = document.getElementById('as-' + r);
+      if (qs) { qs.style.display = r === role ? 'block' : 'none'; if(r===role) qs.classList.add('visible'); else qs.classList.remove('visible'); }
+      if (as) { as.style.display = r === role ? 'block' : 'none'; if(r===role) as.classList.add('visible'); else as.classList.remove('visible'); }
+    });
+    const ph = document.getElementById('assessment-placeholder');
+    if (ph) ph.style.display = 'none';
+  }
+
+  function countChars(el, countId) {
+    const words = el.value.trim() === '' ? 0 : el.value.trim().split(/\s+/).length;
+    document.getElementById(countId).textContent = words + ' word' + (words !== 1 ? 's' : '');
+  }
+
+  function showFileName(input, labelId) {
+    const label = document.getElementById(labelId);
+    if (input.files.length > 0) {
+      label.textContent = '✓ ' + input.files[0].name;
+      label.style.color = 'var(--purple-dark)';
+    }
+  }
+
+  function toggleDeclaration() {
+    declarationChecked = !declarationChecked;
+    const box = document.getElementById('declaration-box');
+    const check = document.getElementById('declaration-check');
+    if (declarationChecked) {
+      box.classList.add('selected');
+      check.style.background = 'var(--purple-main)';
+      check.style.borderColor = 'var(--purple-main)';
+    } else {
+      box.classList.remove('selected');
+      check.style.background = '';
+      check.style.borderColor = '';
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const filled = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
+    let filledCount = 0;
+    filled.forEach(i => { if (i.value.trim()) filledCount++; });
+    const selectedRadios = document.querySelectorAll('.radio-option.selected').length;
+    const total = filled.length + 10;
+    const pct = Math.min(Math.round(((filledCount + selectedRadios) / total) * 100), 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-pct').textContent = pct + '%';
+  }
+
+  // Helper: get value of a selected radio-option in a group
+  function getRadioValue(groupName) {
+    const sel = document.querySelector(`.radio-option.selected[onclick*="'${groupName}'"]`);
+    return sel ? sel.textContent.trim() : '';
+  }
+
+  // Helper: get selected scale button value in a container
+  function getScaleValue(containerId) {
+    const sel = document.querySelector(`#${containerId} .scale-btn.selected`);
+    return sel ? sel.textContent.trim() : '';
+  }
+
+  // Helper: get text/value from an input by placeholder text (fallback selector)
+  function getInputByPlaceholder(placeholder) {
+    const el = document.querySelector(`input[placeholder="${placeholder}"], textarea[placeholder="${placeholder}"]`);
+    return el ? el.value.trim() : '';
+  }
+
+  // Helper: get all inputs inside a section
+  function getSectionInputs(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return [];
+    return Array.from(section.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="url"], input[type="date"], select, textarea'));
+  }
+
+  function collectFormData() {
+    // Section 1 — Personal
+    const s1inputs = getSectionInputs('s1');
+    const fullName   = s1inputs[0]?.value.trim() || '';
+    const email      = s1inputs[1]?.value.trim() || '';
+    const phone      = s1inputs[2]?.value.trim() || '';
+    const dob        = s1inputs[3]?.value.trim() || '';
+    const city       = s1inputs[4]?.value.trim() || '';
+    const state      = s1inputs[5]?.value.trim() || '';
+    const country    = s1inputs[6]?.value.trim() || '';
+    const linkedin   = s1inputs[7]?.value.trim() || '';
+    const portfolio  = s1inputs[8]?.value.trim() || '';
+    const gender     = getRadioValue('gender');
+
+    // Section 2 — Education
+    const s2inputs = getSectionInputs('s2');
+    const degree         = s2inputs[0]?.value.trim() || '';
+    const college        = s2inputs[1]?.value.trim() || '';
+    const graduationYear = s2inputs[2]?.value.trim() || '';
+    const qualification  = getRadioValue('qual');
+    const yearOfStudy    = getRadioValue('year');
+
+    // Section 3 — Role
+    const primaryRole  = selectedRole || '';
+    const secondRole   = document.getElementById('role-second')?.value || '';
+
+    // Section 4 — General Screening
+    const s4inputs = getSectionInputs('s4');
+    const whyDesgnea         = s4inputs[0]?.value.trim() || '';
+    const whyRole            = s4inputs[1]?.value.trim() || '';
+    const careerGoals        = s4inputs[2]?.value.trim() || '';
+    const whatMakesDifferent = s4inputs[3]?.value.trim() || '';
+    const commSkills    = getScaleValue('scale-comm');
+    const problemSolving = getScaleValue('scale-prob');
+    const teamwork      = getScaleValue('scale-team');
+
+    // Section 5 — Experience
+    const s5inputs = getSectionInputs('s5');
+    const prevExperience = s5inputs[0]?.value.trim() || '';
+    const projectLinks   = s5inputs[1]?.value.trim() || '';
+    const prevInternship = getRadioValue('intern');
+    const workedClients  = getRadioValue('clients');
+    const freelanced     = getRadioValue('freelance');
+    const workedRemotely = getRadioValue('remote');
+
+    // Section 6 — Availability
+    const s6inputs = getSectionInputs('s6');
+    const preferredHours  = s6inputs[0]?.value.trim() || '';
+    const dailyHours      = getRadioValue('hours');
+    const available8Weeks = getRadioValue('weeks');
+    const startDate       = getRadioValue('start');
+
+    // Section 7 — Role-specific questions
+    let roleQ1 = '', roleQ2 = '', roleQ3 = '', roleQ4 = '';
+    if (primaryRole) {
+      const qsSection = document.getElementById('qs-' + primaryRole);
+      if (qsSection) {
+        const qsInputs = Array.from(qsSection.querySelectorAll('input[type="text"], input[type="url"], textarea'));
+        roleQ1 = qsInputs[0]?.value.trim() || '';
+        roleQ2 = qsInputs[1]?.value.trim() || '';
+        roleQ3 = qsInputs[2]?.value.trim() || '';
+        roleQ4 = qsInputs[3]?.value.trim() || '';
+      }
+    }
+
+    // Section 8 — Assessment
+    let assessmentAnswer = '';
+    if (primaryRole) {
+      const asSection = document.getElementById('as-' + primaryRole);
+      if (asSection) {
+        const asInput = asSection.querySelector('input[type="url"], textarea');
+        assessmentAnswer = asInput?.value.trim() || '';
+      }
+    }
+
+    // Section 9 — Final Questions
+    const s9inputs = getSectionInputs('s9');
+    const whySelectYou           = s9inputs[0]?.value.trim() || '';
+    const internshipExpectations = s9inputs[1]?.value.trim() || '';
+    const skillsToDevelop        = s9inputs[2]?.value.trim() || '';
+    const anythingElse           = s9inputs[3]?.value.trim() || '';
+    const comfortableFeedback    = getRadioValue('feedback');
+    const comfortableMeetings    = getRadioValue('meetings');
+
+    return {
+      fullName, email, phone, dob, city, state, country, gender, linkedin, portfolio,
+      qualification, degree, college, yearOfStudy, graduationYear,
+      primaryRole, secondRole,
+      whyDesgnea, whyRole, careerGoals, commSkills, problemSolving, teamwork, whatMakesDifferent,
+      prevInternship, workedClients, freelanced, workedRemotely, prevExperience, projectLinks,
+      dailyHours, available8Weeks, startDate, preferredHours,
+      roleQ1, roleQ2, roleQ3, roleQ4,
+      assessmentAnswer,
+      whySelectYou, internshipExpectations, skillsToDevelop, comfortableFeedback, comfortableMeetings, anythingElse,
+    };
+  }
+
+  async function submitForm() {
+    if (!declarationChecked) {
+      document.getElementById('declaration-box').style.borderColor = 'var(--purple-main)';
+      document.getElementById('declaration-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Disable button and show loading state
+    const btn = document.querySelector('.btn-submit');
+    const originalText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span style="opacity:0.7">Submitting…</span>';
+
+    try {
+      const formData = collectFormData();
+
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || 'Submission failed');
+      }
+
+      // Show success screen
+      document.getElementById('form-main').innerHTML = '';
+      const success = document.getElementById('success-screen');
+      document.getElementById('form-main').appendChild(success);
+      success.style.display = 'block';
+      success.classList.add('visible');
+      document.getElementById('progress-fill').style.width = '100%';
+      document.getElementById('progress-pct').textContent = '100%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch (err) {
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+      alert('Something went wrong: ' + err.message + '\n\nPlease try again or contact us directly.');
+    }
+  }
+
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Sidebar active state on scroll
+  const sections = ['s1','s2','s3','s4','s5','s6','s7','s8','s9'];
+  const sectionLabels = ['Personal Information','Education','Role Selection','General Screening','Experience','Availability','Role-Specific Questions','Practical Assessment','Final Questions'];
+
+  window.addEventListener('scroll', () => {
+    let current = 0;
+    sections.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < 180) current = i;
+      }
+    });
+    document.querySelectorAll('.sidebar-item').forEach((item, i) => {
+      item.classList.toggle('active', i === current);
+    });
+    document.getElementById('progress-label').textContent = `Section ${current + 1} of 9 — ${sectionLabels[current]}`;
+  });
+</script>
+</body>
+</html>
