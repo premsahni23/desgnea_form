@@ -6,6 +6,13 @@
 <title>Desgnea — Internship & Associate Program 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  @font-face {
+    font-family: 'Doner';
+    src: url('/doner-regulartext.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   :root {
     --purple-light: #F7F0FF;
     --purple-soft: #D7C7EC;
@@ -122,7 +129,7 @@
   }
 
   .hero h1 {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Doner', 'Syne', sans-serif;
     font-size: clamp(2.2rem, 5vw, 3.8rem);
     font-weight: 800;
     color: var(--text-dark);
@@ -661,7 +668,9 @@
 <body>
 
 <nav>
-  <div class="nav-logo">Desgnea<span>.</span></div>
+  <div class="nav-logo">
+    <img src="/Icon-logo-2.png" alt="Desgnea" style="height:36px; width:auto; display:block;">
+  </div>
   <span class="nav-tag">Internship & Associate Program 2026</span>
 </nav>
 
