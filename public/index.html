@@ -58,18 +58,21 @@
   .nav-logo {
     display: flex;
     align-items: center;
-    width: 180px;
-    height: 70px;
+    width: 200px;
+    height: 60px;
     overflow: hidden;
     position: relative;
   }
 
   .nav-logo img {
     position: absolute;
-    width: 340px;
+    /* Scale the 432×404 image up so the logo content fills nicely */
+    /* The logo takes up roughly the inner 60% of the image */
+    width: 480px;
     height: auto;
     top: 50%;
-    left: 50%;
+    /* Shift left to show the full logo (icon on left, text on right) */
+    left: 48%;
     transform: translate(-50%, -50%);
   }
 
@@ -89,11 +92,11 @@
       padding: 0 1.25rem;
     }
     .nav-logo {
-      width: 150px;
-      height: 58px;
+      width: 160px;
+      height: 52px;
     }
     .nav-logo img {
-      width: 280px;
+      width: 380px;
     }
     .nav-tag {
       font-size: 0.62rem;
@@ -105,8 +108,8 @@
 
   @media (max-width: 400px) {
     nav { height: 60px; }
-    .nav-logo { width: 130px; height: 50px; }
-    .nav-logo img { width: 240px; }
+    .nav-logo { width: 140px; height: 46px; }
+    .nav-logo img { width: 340px; }
     .nav-tag { display: none; }
   }
 
