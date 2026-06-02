@@ -52,23 +52,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 80px;
+    height: 90px;
   }
 
   .nav-logo {
     display: flex;
     align-items: center;
-    overflow: hidden;
   }
 
   .nav-logo img {
-    height: 120px;
+    height: 70px;
     width: auto;
-    max-width: 260px;
     display: block;
-    object-fit: cover;
-    object-position: center;
-    margin: -28px -20px;
+    object-fit: contain;
   }
 
   .nav-logo span { color: var(--black); }
@@ -83,30 +79,24 @@
 
   @media (max-width: 768px) {
     nav {
-      height: 68px;
+      height: 72px;
       padding: 0 1.25rem;
     }
     .nav-logo img {
-      height: 100px;
-      max-width: 200px;
-      margin: -20px -16px;
+      height: 54px;
     }
     .nav-tag {
       font-size: 0.62rem;
       letter-spacing: 0.03em;
-      max-width: 160px;
+      max-width: 150px;
       text-align: right;
     }
   }
 
   @media (max-width: 400px) {
-    .nav-tag {
-      display: none;
-    }
-    .nav-logo img {
-      height: 90px;
-      margin: -18px -14px;
-    }
+    nav { height: 64px; }
+    .nav-logo img { height: 46px; }
+    .nav-tag { display: none; }
   }
 
   /* HERO */
@@ -201,7 +191,7 @@
   /* PROGRESS BAR */
   .progress-container {
     position: sticky;
-    top: 80px;
+    top: 90px;
     z-index: 90;
     background: var(--white);
     border-bottom: 1px solid var(--gray-border);
@@ -247,7 +237,7 @@
   /* SIDEBAR */
   .sidebar {
     position: sticky;
-    top: 140px;
+    top: 150px;
   }
 
   .sidebar-section {
