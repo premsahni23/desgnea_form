@@ -58,22 +58,12 @@
   .nav-logo {
     display: flex;
     align-items: center;
-    width: 200px;
-    height: 60px;
-    overflow: hidden;
-    position: relative;
   }
 
   .nav-logo img {
-    position: absolute;
-    /* Scale the 432×404 image up so the logo content fills nicely */
-    /* The logo takes up roughly the inner 60% of the image */
-    width: 480px;
-    height: auto;
-    top: 50%;
-    /* Shift left to show the full logo (icon on left, text on right) */
-    left: 48%;
-    transform: translate(-50%, -50%);
+    height: 64px;
+    width: auto;
+    display: block;
   }
 
   .nav-logo span { color: var(--black); }
@@ -91,12 +81,8 @@
       height: 68px;
       padding: 0 1.25rem;
     }
-    .nav-logo {
-      width: 160px;
-      height: 52px;
-    }
     .nav-logo img {
-      width: 380px;
+      height: 44px;
     }
     .nav-tag {
       font-size: 0.62rem;
@@ -108,8 +94,7 @@
 
   @media (max-width: 400px) {
     nav { height: 60px; }
-    .nav-logo { width: 140px; height: 46px; }
-    .nav-logo img { width: 340px; }
+    .nav-logo img { height: 38px; }
     .nav-tag { display: none; }
   }
 
