@@ -688,9 +688,46 @@
 
   .yes-no-group { display: flex; gap: 8px; }
   .yes-no-group .radio-option { flex: 1; justify-content: center; }
+
+  /* SCAM ALERT BANNER */
+  .scam-banner {
+    background: #fff8e1;
+    border-bottom: 1px solid #f5c518;
+    padding: 10px 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.78rem;
+    color: #7a5c00;
+    line-height: 1.6;
+    text-align: left;
+  }
+
+  .scam-banner strong {
+    color: #5a3e00;
+  }
+
+  .scam-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  @media (max-width: 768px) {
+    .scam-banner {
+      padding: 10px 1.25rem;
+      font-size: 0.72rem;
+    }
+  }
 </style>
 </head>
 <body>
+
+<!-- SCAM ALERT BANNER -->
+<div class="scam-banner">
+  <span class="scam-icon">⚠️</span>
+  <span><strong>Scam Alert:</strong> DESGNEA never charges any fee for internships, jobs, interviews, or collaborations. If selected, you will be contacted only through our official company email. Please ignore and report any suspicious calls, messages, or payment requests claiming to represent DESGNEA.</span>
+</div>
 
 <nav>
   <div class="nav-logo">
